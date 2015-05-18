@@ -1,0 +1,13 @@
+Library
+    signature ABT
+    functor Abt
+is
+    $/basis.cm
+
+    src/abt.sig
+    src/abt.sml
+
+    src/variable.sig
+    src/variable.sml
+
+    src/operator.sig
