@@ -1,6 +1,10 @@
 Library
     signature ABT
+    signature OPERATOR
+    signature VARIABLE
+
     functor Abt
+    structure Variable
 is
     $/basis.cm
 
