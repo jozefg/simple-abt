@@ -1,3 +1,4 @@
 Group is
+      $/basis.cm
       ../sources.cm
       lam.sml

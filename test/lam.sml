@@ -18,8 +18,8 @@ struct
   open LamOp
   open Lam
 
-  val x = Variable.gen "x"
-  val id = oper LAM [bind x (var x)]
+  fun ap l r = oper AP [l, r]
+  fun lam x e = oper LAM [bind x e]
 
   fun eval e =
       case out e of
@@ -35,6 +35,12 @@ struct
         )
         | _ => raise Fail "Impossible"
 
+  val [x, y, z] = List.map Variable.gen ["x", "y", "z"]
+  val id = lam x (var x)
+  val const = lam x (lam y (var x))
+
   val true = aequiv (eval (oper AP [id, id]), id)
+  val true = aequiv (eval (ap (ap const id) id), id)
+
   val () = print (toString (oper AP [id, id]) ^ "\n")
 end
