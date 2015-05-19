@@ -12,5 +12,5 @@ struct
           val guid = !counter before counter := !counter + fromInt 1
       in {name = name, guid = guid} end
 
-  fun toString {name, guid} = name
+  fun toString {name, guid} = name ^ "@" ^ IntInf.toString guid
 end

@@ -24,11 +24,7 @@ struct
           fun go i e =
               case e of
                   FVar v' => if v = v' then BVar i else FVar v'
-                | BVar j => (
-                    case Int.compare (i, j) of
-                        LESS => BVar j
-                      | _ => BVar (j + 1)
-                )
+                | BVar j => if i <= j then BVar (j + 1) else BVar j
                 | IOper (oper, args) => IOper (oper, map (go i) args)
                 | IBind t => IBind (go (i + 1) t)
       in go 0 end
@@ -40,9 +36,9 @@ struct
                   FVar v => FVar v
                 | BVar j => (
                     case Int.compare (i, j) of
-                        LESS => BVar j
+                        GREATER => BVar j
                       | EQUAL => FVar fv
-                      | GREATER => BVar (j - 1)
+                      | LESS => BVar (j - 1)
                 )
                 | IOper (oper, args) => IOper (oper, map (go i) args)
                 | IBind t => IBind (go (i + 1) t)
